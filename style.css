@@ -1,0 +1,235 @@
+/* ======================
+   공통 레이아웃 & 타이포
+   ====================== */
+.screen {
+    display: none;
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.screen.active {
+    display: block;
+}
+
+body {
+    background-color: var(--bg);
+    transition: background-color 0.3s;
+}
+
+.title {
+    font-family: 'SUIT', sans-serif;
+    font-size: 20px;
+    color: var(--red);
+    margin-bottom: 32px;
+    letter-spacing: -1px;
+}
+
+/* ======================
+     입력 폼
+     ====================== */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 24px auto;
+    width: 200px;
+    font-family: 'SUIT', sans-serif;
+    font-size: 16px;
+    color: var(--dark);
+}
+
+.input-group label {
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.input-group input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    text-align: center;
+    outline: none;
+}
+
+/* ======================
+     타이머 텍스트
+     ====================== */
+.label {
+    font-size: 16px;
+    font-family: 'SUIT', sans-serif;
+    color: var(--gray);
+    margin-top: 24px;
+}
+
+.label.active {
+    color: var(--dark);
+    font-weight: bold;
+}
+
+.time-display {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--gray);
+    margin-bottom: 16px;
+}
+
+.time-display.highlight {
+    color: var(--red);
+}
+
+.time-display.muted {
+    color: var(--pink);
+}
+
+/* ======================
+     세트 정보 + 알림 메시지
+     ====================== */
+.set-text {
+    margin-top: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'SUIT', sans-serif;
+    color: var(--dark);
+}
+
+.alert-text {
+    font-size: 16px;
+    color: var(--red);
+    margin-top: 8px;
+    min-height: 20px;
+    transition: opacity 0.3s;
+}
+
+/* ======================
+     버튼 스타일
+     ====================== */
+.btn {
+    padding: 12px 20px;
+    font-size: 24px;
+    font-family: 'SUIT', sans-serif;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn.gray {
+    background-color: #8d8d8d;
+    color: white;
+}
+
+.btn.red {
+    background-color: var(--red);
+    color: white;
+}
+
+.btn.transparent {
+    background-color: rgba(201, 76, 76, 0.2);
+    color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.btn.toggle-mode {
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* ======================
+     원형 프로그레스 바
+     ====================== */
+.progress-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 24px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+    fill: none;
+    stroke-width: 10;
+    r: 70;
+    cx: 75;
+    cy: 75;
+}
+
+.progress-bg {
+    stroke: #eee;
+}
+
+.progress {
+    stroke: var(--red);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s;
+}
+
+#progress-percent {
+    transform: rotate(90deg);
+    transform-origin: 50% 50%;
+    font-family: 'SUIT', sans-serif;
+    fill: var(--red);
+}
+
+/* ======================
+     다크 모드
+     ====================== */
+body.dark {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+body.dark .title {
+    color: #ffaaaa;
+}
+
+body.dark .label,
+body.dark .time-display {
+    color: #eeeeee;
+}
+
+body.dark .time-display.muted {
+    color: #ff8c8c;
+}
+
+body.dark .btn.gray {
+    background-color: #555;
+}
+
+body.dark .btn.transparent {
+    background-color: rgba(255, 100, 100, 0.2);
+    color: #ff8c8c;
+    border-color: #ff8c8c;
+}
+
+body.dark .input-group label {
+    color: white;
+}
+
+body.dark .set-text {
+    color: white;
+}
+
+body.dark .alert-text {
+    color: #ff8c8c;
+}
+
+body.dark #progress-percent {
+    fill: #ff8c8c;
+}

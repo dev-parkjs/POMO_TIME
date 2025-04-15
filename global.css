@@ -1,0 +1,19 @@
+/* 기본 CSS Reset */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 기본 바디 설정 */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'SUIT', sans-serif;
+    background-color: var(--bg);
+    color: var(--dark);
+    transition: background-color 0.3s ease;
+}
