@@ -70,35 +70,6 @@ HTML, CSS, JavaScript로 타이머를 직접 구현하고, Flask 백엔드를 �
 - **시각화**: SVG 기반 원형 진행률 애니메이션
 - **기록 저장 형식**: `2025년 04월 15일 13시 53분 04초` (한국 시간)
 
----
-
-## 📁 폴더 구조 예시
-
-```bash
-POMP_TIME_/
-├── .gitignore
-├── README.md
-├── backend/
-│   ├── app.py
-│   ├── config.py
-│   ├── requirements.txt
-│   ├── models/
-│   │   └── log.py
-│   ├── routes/
-│   │   ├── log_routes.py
-│   │   └── stats_routes.py
-├── static/
-│   ├── script.js
-│   ├── style.css
-│   ├── global.css
-│   ├── styleguide.css
-│   └── assets/
-│       ├── screen_default.png
-│       ├── screen_darkmode.png
-│       ├── screen_running.png
-│       └── screen_done.png
-├── templates/
-│   └── index.html
 
 ---
 
@@ -119,5 +90,5 @@ POMP_TIME_/
 
 ---
 
-> 본 프로젝트는 시간 관리를 돕는 * 직관적이고 기록 가능한 뽀모도로 타이머 *를 목표로 제작되었습니다. 순수 프론트엔드 구현 이후 Flask 백엔드 연동을 통해, 사용자의 집중 기록을 저장하고 추적하는 기능까지 확장하고 있습니다.
+> 본 프로젝트는 시간 관리를 돕는 직관적이고 기록 가능한 뽀모도로 타이머를 목표로 제작되었습니다. 순수 프론트엔드 구현 이후 Flask 백엔드 연동을 통해, 사용자의 집중 기록을 저장하고 추적하는 기능까지 확장하고 있습니다.
 
