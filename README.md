@@ -1,17 +1,20 @@
 # ⏱️ POMO TIME 🍅 - 웹 기반 뽀모도로 집중 타이머 앱
 
-**POMO TIME 🍅**은 뽀모도로 기법을 기반으로 한 웹 애플리케이션으로, 집중력 향상과 효율적인 시간 관리를 지원합니다. HTML, CSS, JavaScript를 활용해 직접 구현하였으며, 세트 반복, 타이머 자동 전환, 알림음 등 다양한 기능을 포함하고 있습니다.
+**POMO TIME 🍅**은 뽀모도로 기법을 기반으로 한 웹 애플리케이션으로, 집중력 향상과 효율적인 시간 관리를 지원합니다.  
+HTML, CSS, JavaScript로 타이머를 직접 구현하고, Flask 백엔드를 통해 세션 기록과 통계 기능을 확장하였습니다.
+
 
 ---
 
 ## 🔍 프로젝트 개요
 
 - **프로젝트명**: POMO TIME 🍅
-- **기획 의도**: 집중력 향상 및 작업 몰입을 위한 뽀모도로 타이머 구현
+- **기획 의도**: 집중력 향상 및 작업 몰입을 위한 뽀모도로 타이머 + 기록 추적 시스템
 - **개발 포인트**:
-  - **직접 구현한 순수 자바스크립트 타이머**
-  - **세트 수 조정 / 반복 기능 / 알림 음향 포함**
-  - **다크모드 지원** 및 사용자 친화적인 UI
+  - **순수 JavaScript 기반 타이머 로직**
+  - **Flask 기반 백엔드 연동 (기록 저장, 통계 API)**
+  - **세트 반복 / 자동 전환 / UI 알림 효과**
+  - **다크모드 및 시각화 인터페이스 적용**
 
 ---
 
@@ -23,13 +26,18 @@
 | 📦 세트 수 설정 | 예: 4세트 완료 후 긴 휴식 제공 |
 | 🔄 세트 진행 표시 | "2 / 4세트" 등 현재 세트 표시 |
 | 🟢 원형 프로그래스바 | 타이머 진행률을 시각적으로 표현 |
-| 🔔 알림음 재생 | 타이머 종료 시 알림음 (애플 알람톤 등) |
-| 🌙 다크모드 지원 | 사용자 UI 환경에 따라 테마 전환 |
-| ✅ 완료 텍스트 안내 | 각 단계 완료 시 텍스트 피드백 제공 |
+| 🔔 알림 텍스트 | 각 세션 종료 시 피드백 안내 |
+| 🌙 다크모드 지원 | 버튼 클릭으로 다크/라이트 전환 |
+| 🧠 기록 저장 (Flask) | 타이머 종료 시 Work/Rest 세션 DB 저장 |
+| 📊 통계 API 제공 | `/stats/today` 요청 시 오늘 집중 시간 반환 |
+| 🇰🇷 한국 시간 기록 | 기록 시 `2025년 04월 15일 13시 00분 00초` 형식 저장 |
 
 ---
 
+
+
 ## 🖼️ 화면 구성 미리보기
+
 
 <table>
   <tr>
@@ -37,16 +45,16 @@
     <td align="center"><b>다크 모드</b></td>
   </tr>
   <tr>
-    <td><img src="./assets/screen_default.png" width="350" /></td>
-    <td><img src="./assets/screen_darkmode.png" width="350" /></td>
+    <td><img src="./static/assets/screen_default.png" width="350" /></td>
+    <td><img src="./static/assets/screen_darkmode.png" width="350" /></td>
   </tr>
   <tr>
     <td align="center"><b>진행 중</b></td>
     <td align="center"><b>완료 화면</b></td>
   </tr>
   <tr>
-    <td><img src="./assets/screen_running.png" width="350" /></td>
-    <td><img src="./assets/screen_done.png" width="350" /></td>
+    <td><img src="./static/assets/screen_running.png" width="350" /></td>
+    <td><img src="./static/assets/screen_done.png" width="350" /></td>
   </tr>
 </table>
 
@@ -56,37 +64,51 @@
 
 ## 🛠 기술 스택
 
-- **Frontend**: HTML5, CSS3, JavaScript
-- **디자인 기반**: Figma → CSS 직접 변환
-- **애니메이션/시각화**: 원형 SVG, transition 효과
-- **반응형 설계**: 모바일 환경 고려된 구조 (미니멀)
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Backend**: Python, Flask, SQLite
+- **디자인 기반**: Figma → 직접 CSS 구현
+- **시각화**: SVG 기반 원형 진행률 애니메이션
+- **기록 저장 형식**: `2025년 04월 15일 13시 53분 04초` (한국 시간)
 
 ---
 
 ## 📁 폴더 구조 예시
 
 ```bash
-POMO_TIME/
-├── index.html           # 메인 구조
-├── style.css            # 다크모드 포함 전체 스타일
-├── app.js               # 타이머/세트 로직 + DOM 연동
-├── assets/              # 아이콘, 알림음, UI 캡처 이미지 등
-│   ├── screen_default.png
-│   ├── screen_darkmode.png
-│   ├── screen_running.png
-│   └── screen_done.png
-└── README.md            # 프로젝트 설명서
-```
+POMP_TIME_/
+├── .gitignore
+├── README.md
+├── backend/
+│   ├── app.py
+│   ├── config.py
+│   ├── requirements.txt
+│   ├── models/
+│   │   └── log.py
+│   ├── routes/
+│   │   ├── log_routes.py
+│   │   └── stats_routes.py
+├── static/
+│   ├── script.js
+│   ├── style.css
+│   ├── global.css
+│   ├── styleguide.css
+│   └── assets/
+│       ├── screen_default.png
+│       ├── screen_darkmode.png
+│       ├── screen_running.png
+│       └── screen_done.png
+├── templates/
+│   └── index.html
 
 ---
 
 ## 🚀 향후 개선 계획
 
-- ⏳ 사용자 커스텀 시간 설정 기능 (ex. 30분 작업)
-- 📊 localStorage 기반 세션 기록 저장
-- 📈 집중 시간 통계 시각화 기능 (차트)
-- 🔗 Firebase / Supabase 연동 (기록 백업)
-- 📱 모바일 완전 대응 레이아웃 개선
+	•	⏳ 커스텀 세션 시간 설정 기능 (ex. 30분 작업 → 10분 휴식)
+	•	🔔 알림 소리 지원 (브라우저 Audio API)
+	•	📊 누적 집중 시간 시각화 (차트/그래프)
+	•	📝 /history 페이지로 날짜별 기록 리스트 출력
+	•	📱 모바일 UI 개선 + PWA 기능 적용 (앱 설치 가능하게)
 
 ---
 
@@ -97,5 +119,5 @@ POMO_TIME/
 
 ---
 
-> 본 프로젝트는 시간 관리에 어려움을 겪는 사람들을 위한 **작고 강력한 집중 도구**를 목표로 개발되었습니다. 순수 자바스크립트 기반의 로직 구현 경험과 사용자 인터페이스 개선에 초점을 맞춘 **프로젝트**입니다.
+> 본 프로젝트는 시간 관리를 돕는 * 직관적이고 기록 가능한 뽀모도로 타이머 *를 목표로 제작되었습니다. 순수 프론트엔드 구현 이후 Flask 백엔드 연동을 통해, 사용자의 집중 기록을 저장하고 추적하는 기능까지 확장하고 있습니다.
 
