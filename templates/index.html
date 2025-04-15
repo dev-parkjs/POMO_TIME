@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PomoTime</title>
+
+  <!-- ✅ Flask 방식으로 static 경로 지정 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styleguide.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+  <!-- ✅ 외부 폰트는 그대로 유지 -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- MAIN 화면 -->
+  <div id="main-screen" class="screen active">
+    <h1 class="title">POMO TIME 🍅</h1>
+
+    <div class="input-group">
+      <label for="work-input">WORK (min)</label>
+      <input type="number" id="work-input" value="25" min="1" />
+      <label for="rest-input">REST (min)</label>
+      <input type="number" id="rest-input" value="5" min="1" />
+      <label for="sets-input">세트 수</label>
+      <input type="number" id="sets-input" value="4" min="1" />
+    </div>
+
+    <div class="timers">
+      <div class="label">WORK</div>
+      <div class="time-display">00:00</div>
+      <div class="label">REST</div>
+      <div class="time-display">00:00</div>
+    </div>
+
+    <button class="btn gray" onclick="startPomodoro()">▶ START</button>
+    <button class="btn toggle-mode" onclick="toggleDarkMode()">🌙 다크모드</button>
+  </div>
+
+  <!-- ING 화면 -->
+  <div id="ing-screen" class="screen">
+    <h1 class="title">POMO TIME 🍅</h1>
+
+    <p id="set-info" class="set-text">1 / 4세트</p>
+
+    <div class="progress-container">
+      <svg class="progress-ring" width="150" height="150">
+        <circle class="progress-bg" r="70" cx="75" cy="75" />
+        <circle id="progress-ring" class="progress" r="70" cx="75" cy="75" stroke-dasharray="440" stroke-dashoffset="440" />
+        <text id="progress-percent" x="75" y="82" text-anchor="middle" font-size="20" fill="var(--red)">100%</text>
+      </svg>
+    </div>
+
+    <div class="timers">
+      <div class="label active" id="status-label">WORK</div>
+      <div class="time-display highlight" id="work-time">00:00</div>
+      <div class="label">REST</div>
+      <div class="time-display muted" id="rest-time">00:00</div>
+    </div>
+
+    <p id="alert-msg" class="alert-text"></p>
+
+    <div class="btn-group">
+      <button class="btn transparent" onclick="switchScreen('done')">❌ STOP</button>
+      <button id="pause-btn" class="btn red" onclick="togglePause()">⏸ PAUSE</button>
+    </div>
+  </div>
+
+  <!-- DONE 화면 -->
+  <div id="done-screen" class="screen">
+    <h1 class="title">POMO TIME 🍅</h1>
+    <p>모든 세트를 완료했어요! 🎉</p>
+    <button class="btn red" onclick="switchScreen('main')">🔄 RESET</button>
+  </div>
+
+  <!-- ✅ JS도 static에서 불러오기 -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

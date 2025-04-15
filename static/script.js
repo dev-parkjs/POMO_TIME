@@ -33,6 +33,9 @@ function startTimer() {
             updateTime('work-time', workTime);
             updateProgress(defaultWork, currentTotal);
             if (workTime <= 0) {
+                // ✅ Work 세션 기록
+                saveSessionToServer('Work', defaultWork / 60, defaultWork);
+
                 isWorking = false;
                 currentTotal = defaultRest;
                 document.getElementById('status-label').textContent = 'REST';
@@ -44,6 +47,11 @@ function startTimer() {
             updateTime('rest-time', restTime);
             updateProgress(defaultRest, currentTotal);
             if (restTime <= 0) {
+                // ✅ 마지막 세트면 Rest도 기록
+                if (currentSet >= totalSets) {
+                    saveSessionToServer('Rest', defaultRest / 60, defaultRest);
+                }
+
                 currentSet++;
                 updateSetInfo();
                 if (currentSet > totalSets) {
@@ -115,4 +123,24 @@ function switchScreen(to) {
 
 function toggleDarkMode() {
     document.body.classList.toggle('dark');
+}
+
+// ✅ 서버로 세션 저장 (mode, duration(분), time("MM:SS"))
+function saveSessionToServer(mode, duration, seconds) {
+    const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const sec = String(seconds % 60).padStart(2, '0');
+    const timeFormatted = `${min}:${sec}`;
+
+    fetch('/log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            mode: mode,
+            duration: duration,
+            time: timeFormatted
+        })
+    })
+        .then(res => res.json())
+        .then(data => console.log("✅ 세션 기록 저장됨:", data))
+        .catch(err => console.error("❌ 세션 저장 실패:", err));
 }

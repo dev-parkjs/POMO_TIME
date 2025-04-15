@@ -1,0 +1,20 @@
+# Python 캐시 파일
+__pycache__/
+*.pyc
+*.pyo
+
+# 가상환경
+venv/
+
+# SQLite DB (개인 기록 포함됨)
+pomodoro.db
+
+# macOS 시스템 파일
+.DS_Store
+
+# 기타 불필요한 파일
+*.log
+*.sqlite3
+
+# VS Code 설정 (원한다면)
+.vscode/
